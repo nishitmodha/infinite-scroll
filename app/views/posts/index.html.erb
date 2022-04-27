@@ -8,19 +8,8 @@
     <%= link_to 'New post', new_post_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
 
-  <div id="posts" class="min-w-full">
+  <%= turbo_frame_tag "posts", class: "min-w-full", autoscroll: "true" do %>
     <%= render @posts %>
-  </div>
-  <div id="pager" class="min-w-full my-8 flex justify-between">
-    <div>
-      <% if @pagy.prev %>
-        <%= link_to "< Previous page", posts_path(page: @pagy.prev), class: "rounded py-3 px-5 bg-gray-600 text-white block hover:bg-gray-800" %>
-      <% end %>
-    </div>
-    <div class="text-right">
-      <% if @pagy.next %>
-        <%= link_to "Next page >", posts_path(page: @pagy.next), class: "rounded py-3 px-5 bg-gray-600 text-white block hover:bg-gray-800" %>
-      <% end %>
-    </div>
-  </div>
+    <%= render "pager", pagy: @pagy %>
+  <% end %>
 </div>
